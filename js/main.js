@@ -398,7 +398,7 @@ productSlider();
 const gallerySlider = () => {
   const gallerySliderMain = document.querySelector('.gallery-slider__main');
 
-    $('a[data-rel^=lightcase]').lightcase();
+  $('a[data-rel^=lightcase]').lightcase();
 
   if (gallerySliderMain) {
     $('.gallery-slider__main').slick({
@@ -959,3 +959,69 @@ const tabPrice = () => {
   }
 };
 tabPrice();
+
+// tabs
+const initTabs = (tabsContainer) => {
+  const tabButtons = tabsContainer.querySelectorAll('.tabs-button');
+  const tabs = tabsContainer.querySelectorAll('.tab');
+
+  const activateTab = (tabId, shouldScroll = false) => {
+    tabButtons.forEach((btn) => btn.classList.remove('active'));
+    tabs.forEach((tab) => tab.classList.remove('active'));
+
+    const activeButton = tabsContainer.querySelector(
+      `.tabs-buttons [data-tab-open="${tabId}"]`
+    );
+    const activeTab = tabsContainer.querySelector(
+      `.tab[data-tab-id="${tabId}"]`
+    );
+
+    if (activeButton) {
+      activeButton.classList.add('active');
+    }
+
+    if (activeTab) {
+      activeTab.classList.add('active');
+      // Прокрутка к активной вкладке только если shouldScroll = true
+      if (shouldScroll) {
+        activeTab.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+    }
+  };
+
+  // Обработчик клика по кнопкам вкладок
+  tabButtons.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      const tabId = button.getAttribute('data-tab-open');
+      activateTab(tabId);
+    });
+  });
+
+  // Обработчик клика по ссылкам с data-link-tab-open
+  const linkTabs = document.querySelectorAll('[data-link-tab-open]');
+  linkTabs.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      linkTabs.forEach((l) => l.classList.remove('active'));
+
+      link.classList.add('active');
+
+      const tabId = link.getAttribute('data-link-tab-open');
+      activateTab(tabId, true);
+    });
+  });
+
+  // Проверка наличия якоря в URL
+  const hash = window.location.hash.substring(1);
+  if (hash) {
+    activateTab(hash, true);
+  }
+};
+
+// Инициализация табов для каждого контейнера
+const tabContainers = document.querySelectorAll('.tabs-container');
+tabContainers.forEach(initTabs);

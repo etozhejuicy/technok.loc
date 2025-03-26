@@ -3474,6 +3474,108 @@ footer li:nth-child(3n) {
 .advantage > p {
 }
 
+/* information */
+.information {
+  position: relative;
+  padding: 0;
+  margin-bottom: 64px;
+}
+
+.information > .container {
+  flex-direction: column;
+}
+
+/* tabs */
+.tabs-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  flex-wrap: nowrap;
+  width: 100%;
+  box-shadow: inset 0px -1px 0px 0px #f0f0f0;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.tabs-buttons > * {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 0 auto;
+  padding: 20px 40px;
+  background-color: #fff3f3;
+  text-decoration: none !important;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+}
+@media (max-width: 991px) {
+  .tabs-buttons > * {
+    padding: 16px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 420px) {
+  .tabs-buttons > * {
+    padding: 14px 10px;
+    font-size: 12px;
+  }
+}
+.tabs-buttons > *.active {
+  background-color: #da1713;
+  color: #ffffff;
+}
+
+.tabs {
+  display: block;
+  width: 100%;
+}
+
+.tabs .tab {
+  display: none;
+  padding: 0;
+}
+.tabs .tab-padding {
+  padding: 35px 0;
+}
+@media (max-width: 991px) {
+  .tabs .tab-padding {
+    padding: 20px 0;
+  }
+}
+@media (max-width: 720px) {
+  .tabs .tab-padding {
+    padding: 10px 0;
+  }
+}
+.tabs .tab.active {
+  display: block;
+}
+
+.tabs .tab > p {
+  margin-bottom: 16px;
+}
+
+.tabs .tab ul {
+  margin-left: 20px;
+}
+
+label.tabs-button > input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  cursor: pointer;
+}
+
 /* Article */
 
 article {

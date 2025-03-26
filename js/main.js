@@ -909,6 +909,108 @@ const modalOrderPay = () => {
 };
 modalOrderPay();
 
+// modal consultation
+const modalConsultation = () => {
+  const modal = document.querySelector('.modal__consultation');
+  const consultationButton = document.querySelector('#getHelp');
+
+  if (consultationButton) {
+    consultationButton.addEventListener('click', () => {
+      document.querySelector('.modal-order-title').textContent =
+        'Запросить консультацию';
+      document.querySelector('.modal-order-btn').textContent = 'Отправить';
+      document
+        .querySelector('.modal-order-form')
+        .setAttribute('data-order', 'consultation');
+
+      modal.style.display = 'block';
+
+      // Находим фото товара (если необходимо)
+      const productPhoto = document.querySelector('.view-good-img').src;
+      // Находим название товара (если необходимо)
+      const productTitle = document.querySelector('.view-good-name').innerHTML;
+
+      // Записываем данные в модалку
+      const consultationCard = modal.querySelector('.order__card');
+      consultationCard.innerHTML = `
+                <img src="${productPhoto}" width="170" alt="${productTitle}">
+                <p class="card__descr">${productTitle}</p>
+            `;
+      maskPhone('#consultation-phone');
+    });
+  }
+
+  modal.addEventListener('click', (evt) => {
+    const target = evt.target;
+
+    if (target.closest('.modal__button')) {
+      modal.style.display = '';
+    } else if (target.matches('.modal__consultation')) {
+      modal.style.display = '';
+    }
+  });
+};
+
+modalConsultation();
+
+// modal consultation
+const modalConsult = () => {
+  const modal = document.querySelector('.modal__consultation');
+  const priceContainer = document.querySelector('.price');
+
+  // Обработчик для всех кнопок "Получить консультацию"
+  priceContainer.addEventListener('click', (evt) => {
+    const target = evt.target;
+
+    if (target.matches('.button-main-consultation')) {
+      const productCard = target.closest('.product-card'); // Предполагаем, что у каждого товара есть класс .product-card
+
+      // Получаем данные из соответствующей карточки товара
+      const photo = productCard.querySelector('.view-good-img').src;
+      const title = productCard.querySelector('.view-good-name').innerHTML;
+      const priceOld = productCard.querySelector('.view-good-price')
+        ? productCard.querySelector('.view-good-price').innerHTML
+        : '';
+      const priceNew = productCard.querySelector(
+        '.view-good-discount-price'
+      ).innerHTML;
+
+      // Заполняем модалку данными
+      document.querySelector('.modal-consultation-title').textContent =
+        'Запросить консультацию';
+      document.querySelector('.modal-consultation-btn').textContent =
+        'Отправить';
+      document
+        .querySelector('.modal-consultation-form')
+        .setAttribute('data-order', 'consultation');
+
+      const consultationCard = modal.querySelector('.consultation__card');
+      consultationCard.innerHTML = `
+                <img src="${photo}" width="170" alt="${title}">
+                <p class="card__descr">Консультация по товару: ${title}</p>
+                <span class="card__price card__price--new">${priceNew}</span>
+                <span class="card__price card__price--old">${priceOld}</span>
+            `;
+      maskPhone('#consultation-phone');
+
+      // Открываем модалку
+      modal.style.display = 'block';
+    }
+  });
+
+  modal.addEventListener('click', (evt) => {
+    const target = evt.target;
+
+    if (target.closest('.consultation__button')) {
+      modal.style.display = '';
+    } else if (target.matches('.modal__consultation')) {
+      modal.style.display = '';
+    }
+  });
+};
+
+modalConsult();
+
 // Маска для поля ввода телефона
 function maskPhone(selector, masked = '+7 (___) ___-__-__') {
   const elems = document.querySelectorAll(selector);

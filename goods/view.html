@@ -379,7 +379,7 @@
 						&nbsp;
 					</span>
 					<div class="button--wrapper button--wrapper-product">
-						<button class="button-main" type="button">
+						<button class="button-main" type="button" id="getHelp">
 							Получить консультацию
 						</button>
 					</div>
@@ -480,6 +480,7 @@
 
 		</section>
 
+		<!-- Изменения в блоке товаров -->
 		<section class="price">
 
 			<!--        <h2 class="price__title">Прайс-лист на "--><!--"</h2>-->
@@ -546,6 +547,11 @@
 								Заказать
 							</button>
 						</div>
+						<div class="button--wrapper button--wrapper-product">
+							<button class="button-main" type="button" data-consult="2x">
+								Консультация
+							</button>
+						</div>
 					</li>
 				</ul>
 
@@ -569,6 +575,11 @@
 								Заказать
 							</button>
 						</div>
+						<div class="button--wrapper button--wrapper-product">
+							<button class="button-main" type="button" data-consult="3x">
+								Консультация
+							</button>
+						</div>
 					</li>
 				</ul>
 
@@ -590,6 +601,11 @@
 						<div class="button--wrapper">
 							<button class="button-main" type="button" data-button="4x">
 								Заказать
+							</button>
+						</div>
+						<div class="button--wrapper button--wrapper-product">
+							<button class="button-main" type="button" data-consult="4x">
+								Консультация
 							</button>
 						</div>
 					</li>
@@ -963,6 +979,7 @@
 
 		</article>
 
+		<!-- Обновление в блоке видео -->
 		<section class="video-about video-products">
 			<!--	<h2>Видео нашей продукции</h2>-->
 			<p class="video-h2">
@@ -1030,6 +1047,14 @@
 				</div>
 			</div>
 
+		</section>
+
+		<!-- Новая секция: Отзывы -->
+		<section class="reviews">
+			<div class="container">
+				<script src="https://res.smartwidgets.ru/app.js" defer></script>
+				<div class="sw-app" data-app="988ef7f9290cc0b50083817e319597c6"></div>
+			</div>
 		</section>
 	</main>
 
@@ -1210,6 +1235,57 @@
 		<div class="order order--success">
 			<p class="order__title">Спасибо за заказ! Наши менеджеры скоро с вами свяжутся!</p>
 
+			<button class="order__button">
+				<svg class="order__icon" width="18" height="18">
+					<use xlink:href="/img/iconsHeader.svg#cross"></use>
+				</svg>
+			</button>
+		</div>
+	</div>
+	<!-- Новая модалка: Консультация -->
+	<div class="modal__consultation">
+		<div class="order">
+			<p class="order__title modal-order-title">Получить консультацию</p>
+			<div class="container">
+				<div class="order__card">
+					<img src="/" width="170" alt="Консультация">
+					<p class="card__descr"></p>
+					<span class="card__price card__price--new"></span>
+					<span class="card__price card__price--old"></span>
+				</div>
+	
+				<form class="order__form modal-order-form" id="help-form" data-order="consultation">
+					<input type="hidden" id="data-id-form" name="data-id" value="0">
+					<input type="hidden" id="data-sub-id-form" name="data-sub-id" value="0">
+					<input type="text" placeholder="Имя" name="name" required>
+					<input type="tel" placeholder="Номер телефона" name="tel" id="consultation-phone" required>
+					<input type="hidden" name="_csrf-frontend">
+					<small>
+						Нажимая кнопку, Вы даёте <a class="polytic-href" href="/polytic" target="_blank">
+							<strong>
+								согласие
+								на обработку персональных данных
+							</strong>
+						</a>
+					</small>
+					<div class="button--wrapper">
+						<button class="button-main modal-order-btn button--wrapper-last" type="submit">
+							Получить консультацию
+						</button>
+					</div>
+					</div>
+				</form>
+
+				<button class="modal__button">
+					<svg class="modal__icon" width="18" height="18">
+						<use xlink:href="/img/iconsHeader.svg#cross"></use>
+					</svg>
+				</button>
+			</div>
+		</div>
+		<div class="order order--success">
+			<p class="order__title">Спасибо за заказ! Наши менеджеры скоро с вами свяжутся!</p>
+	
 			<button class="order__button">
 				<svg class="order__icon" width="18" height="18">
 					<use xlink:href="/img/iconsHeader.svg#cross"></use>

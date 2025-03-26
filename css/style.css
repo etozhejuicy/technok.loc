@@ -3542,16 +3542,16 @@ footer li:nth-child(3n) {
   padding: 0;
 }
 .tabs .tab-padding {
-  padding: 35px 0;
+  padding: 35px 0 0 0;
 }
 @media (max-width: 991px) {
   .tabs .tab-padding {
-    padding: 20px 0;
+    padding: 20px 0 0 0;
   }
 }
 @media (max-width: 720px) {
   .tabs .tab-padding {
-    padding: 10px 0;
+    padding: 10px 0 0 0;
   }
 }
 .tabs .tab.active {

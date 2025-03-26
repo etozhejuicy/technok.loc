@@ -515,281 +515,449 @@ const photoGallery = () => {
 photoGallery();
 
 // modal order
-const modalOrder = () => {
+// const modalOrder = () => {
+//   const modal = document.querySelector('.modal__order');
+//   const priceContainer = document.querySelector('.price');
+//   const productButton = document.querySelector('.button-main');
+//   productButton.addEventListener('click', () => {
+//     document.querySelector('.modal-order-title').textContent =
+//       'Оформление заказа';
+//     document.querySelector('.modal-order-btn').textContent = 'Заказать';
+//     document
+//       .querySelector('.modal-order-form')
+//       .setAttribute('data-order', 'order');
+
+//     modal.style.display = 'block';
+
+//     //Находим фото товара
+//     const photo = document.querySelector('.view-good-img').src;
+//     //Находим название товара
+//     const title = document.querySelector('.view-good-name').innerHTML;
+//     //Находим его старую цену
+//     let priceOld = '';
+//     if (document.querySelector('.view-good-price')) {
+//       priceOld = document.querySelector('.view-good-price').innerHTML;
+//     }
+//     // const priceOld = document.querySelector(".view-good-price").innerHTML;
+//     //Находим его новую цену
+//     const priceNew = document.querySelector(
+//       '.view-good-discount-price'
+//     ).innerHTML;
+
+//     // id товара и листа
+//     const goodId = document.querySelector('#data-id-form');
+//     const goodSubId = document.querySelector('#data-sub-id-form');
+//     const tinkoffDiv = document.querySelector('#tinkoff-button');
+//     tinkoffDiv.insertAdjacentHTML(
+//       'afterbegin',
+//       '<tinkoff-create-button size="M" subtext="на 6 месяцев" shopId="82273e5b-9587-44ad-b8e0-c8eea7f6322f" showcaseId="314dcc5e-6f27-410c-bfe3-3cabfa6768bf" ui-data="productType=installment&useReturnLinks=true&view=newTab" payment-data="items.0.name=' +
+//       title +
+//       '&items.0.price=' +
+//       Number(priceNew.replace(' ', '').replace('₽', '')) +
+//       '&items.0.quantity=1&promoCode=installment_0_0_6_6,5&sum=' +
+//       Number(priceNew.replace(' ', '').replace('₽', '')) +
+//       '"></tinkoff-create-button>'
+//     );
+//     tinkoffDiv.style.marginTop = '10px';
+
+//     goodId.value = document
+//       .querySelector('.view-good-name')
+//       .getAttribute('data-good-id');
+//     goodSubId.value = 0;
+//     const orderCard = document.querySelector('.order__card');
+//     orderCard.innerHTML = `
+//                 <img src="${photo}" width="170" alt=${title}>
+//                 <p class="card__descr"> ${title}</p>
+//                 <span class="card__price card__price--new">${priceNew}</span>
+//                 <span class="card__price card__price--new">${priceOld}</span>
+//             `;
+//     maskPhone('#order-phone');
+//   });
+
+//   modal.addEventListener('click', (evt) => {
+//     const target = evt.target;
+//     const tinkoffDiv = document.querySelector('#tinkoff-button');
+
+//     if (target.closest('.order__button')) {
+//       modal.style.display = '';
+//       tinkoffDiv.removeChild(tinkoffDiv.firstChild);
+//     } else if (target.matches('.modal__order')) {
+//       modal.style.display = '';
+//       tinkoffDiv.removeChild(tinkoffDiv.firstChild);
+//     }
+//   });
+
+//   priceContainer.addEventListener('click', (evt) => {
+//     const target = evt.target;
+
+//     const orderModal = (selectorColumn, selectorLink) => {
+//       //Находим все li с классом price__list--2x
+//       const orderList = priceContainer.querySelector(selectorColumn);
+
+//       //Находим фото товара
+//       const photo = priceContainer.querySelector(selectorLink).children[0].src;
+
+//       //Находим модель товара
+//       const mainTitle = document.querySelector('.view-good-name').innerHTML;
+
+//       const title = orderList.querySelector('[data-attribute=name]').innerHTML;
+
+//       //Находим его старую цену
+//       const priceOld = orderList.querySelector('.line-throw').innerHTML;
+
+//       //Находим его новую цену
+//       const priceNew = orderList.querySelector('.bold').innerHTML;
+
+//       //Находим модалку
+//       const orderCard = modal.querySelector('.order__card');
+
+//       // id товара и листа
+//       const goodId = document.querySelector('#data-id-form');
+//       const goodSubId = document.querySelector('#data-sub-id-form');
+//       const tinkoffDiv = document.querySelector('#tinkoff-button');
+//       tinkoffDiv.insertAdjacentHTML(
+//         'afterbegin',
+//         '<tinkoff-create-button size="M" subtext="на 6 месяцев" shopId="82273e5b-9587-44ad-b8e0-c8eea7f6322f" showcaseId="314dcc5e-6f27-410c-bfe3-3cabfa6768bf" ui-data="productType=installment&useReturnLinks=true&view=newTab" payment-data="items.0.name=' +
+//         title +
+//         '&items.0.price=' +
+//         Number(priceNew.replace(' ', '').replace('₽', '')) +
+//         '&items.0.quantity=1&promoCode=installment_0_0_6_6,5&sum=' +
+//         Number(priceNew.replace(' ', '').replace('₽', '')) +
+//         '"></tinkoff-create-button>'
+//       );
+//       tinkoffDiv.style.marginTop = '10px';
+
+//       goodId.value = orderList
+//         .querySelector('[data-id]')
+//         .getAttribute('data-id');
+
+//       if (selectorColumn == '.price__list--2x') {
+//         goodSubId.value = 1;
+//       }
+//       if (selectorColumn == '.price__list--3x') {
+//         goodSubId.value = 2;
+//       }
+//       if (selectorColumn == '.price__list--4x') {
+//         goodSubId.value = 3;
+//       }
+//       if (selectorColumn == '.price__list--5x') {
+//         goodSubId.value = 4;
+//       }
+//       if (selectorColumn == '.price__list--6x') {
+//         goodSubId.value = 5;
+//       }
+
+//       //Записываем в модалку данные выбранного товара
+//       orderCard.innerHTML = `
+//                     <img src="${photo}" width="170" alt="${mainTitle}">
+//                     <p class="card__descr">${mainTitle} ${title}</p>
+//                     <span class="card__price card__price--new">${priceNew}</span>
+//                     <span class="card__price card__price--old">${priceOld}</span>
+//                 `;
+//       maskPhone('#order-phone');
+
+//       //Открываем модалку
+//       modal.style.display = 'block';
+//     };
+
+//     if (target.matches('.button-main')) {
+//       // Одна кнопка в листе на мобильной
+//       modal.style.display = 'block';
+
+//       //Находим фото товара
+//       const photo = document.querySelector('.view-good-img').src;
+//       //Находим название товара
+//       const title = document.querySelector('.view-good-name').innerHTML;
+//       //Находим его старую цену
+//       let priceOld = '';
+//       if (document.querySelector('.view-good-price')) {
+//         priceOld = document.querySelector('.view-good-price').innerHTML;
+//       }
+//       // const priceOld = document.querySelector(".view-good-price").innerHTML;
+//       //Находим его новую цену
+//       const priceNew = document.querySelector(
+//         '.view-good-discount-price'
+//       ).innerHTML;
+//       // id товара и листа
+//       const goodId = document.querySelector('#data-id-form');
+//       const goodSubId = document.querySelector('#data-sub-id-form');
+//       // const tinkoffDiv = document.querySelector("#tinkoff-button");
+//       // tinkoffDiv.insertAdjacentHTML(
+//       //   "afterbegin",
+//       //   '<tinkoff-create-button size="M" subtext="на 6 месяцев" shopId="82273e5b-9587-44ad-b8e0-c8eea7f6322f" showcaseId="314dcc5e-6f27-410c-bfe3-3cabfa6768bf" ui-data="productType=installment&useReturnLinks=true&view=newTab" payment-data="items.0.name=' +
+//       //     title +
+//       //     "&items.0.price=" +
+//       //     Number(priceNew.replace(" ", "").replace("₽", "")) +
+//       //     "&items.0.quantity=1&promoCode=installment_0_0_6_6,5&sum=" +
+//       //     Number(priceNew.replace(" ", "").replace("₽", "")) +
+//       //     '"></tinkoff-create-button>'
+//       // );
+
+//       goodId.value = document
+//         .querySelector('.view-good-name')
+//         .getAttribute('data-good-id');
+//       goodSubId.value = 0;
+//       const orderCard = modal.querySelector('.order__card');
+//       orderCard.innerHTML = `
+//                 <img src="${photo}" width="170" alt=${title}>
+//                 <p class="card__descr"> ${title}</p>
+//                 <span class="card__price card__price--new">${priceNew}</span>
+//                 <span class="card__price card__price--old">${priceOld}</span>
+//             `;
+//       maskPhone('#order-phone');
+//     }
+
+//     if (target.dataset.button === '2x') {
+//       orderModal('.price__list--2x', '.price__link--2x');
+//     }
+
+//     if (target.dataset.button === '3x') {
+//       orderModal('.price__list--3x', '.price__link--3x');
+//     }
+
+//     if (target.dataset.button === '4x') {
+//       orderModal('.price__list--4x', '.price__link--4x');
+//     }
+
+//     if (target.dataset.button === '5x') {
+//       orderModal('.price__list--5x', '.price__link--5x');
+//     }
+
+//     if (target.dataset.button === '6x') {
+//       orderModal('.price__list--6x', '.price__link--6x');
+//     }
+//   });
+// };
+
+// modalOrder();
+
+// const modalOrderPay = () => {
+//   const modal = document.querySelector('.modal__order');
+//   const priceContainer = document.querySelector('.price');
+//   const productButton = document.querySelector('.button-main-pay');
+
+//   if (productButton) {
+//     productButton.addEventListener('click', () => {
+//       document.querySelector('.modal-order-title').textContent =
+//         'Купить онлайн';
+//       document.querySelector('.modal-order-btn').textContent = 'Купить';
+//       document
+//         .querySelector('.modal-order-form')
+//         .setAttribute('data-order', 'pay');
+
+//       modal.style.display = 'block';
+//       //Находим фото товара
+//       const photo = document.querySelector('.view-good-img').src;
+//       //Находим название товара
+//       const title = document.querySelector('.view-good-name').innerHTML;
+//       //Находим его старую цену
+//       const priceOld = document.querySelector('.view-good-price').innerHTML;
+//       //Находим его новую цену
+//       const priceNew = document.querySelector(
+//         '.view-good-discount-price'
+//       ).innerHTML;
+//       // id товара и листа
+//       const goodId = document.querySelector('#data-id-form');
+//       const goodSubId = document.querySelector('#data-sub-id-form');
+//       const tinkoffDiv = document.querySelector('#tinkoff-button');
+//       tinkoffDiv.insertAdjacentHTML(
+//         'afterbegin',
+//         '<tinkoff-create-button size="M" subtext="на 6 месяцев" shopId="82273e5b-9587-44ad-b8e0-c8eea7f6322f" showcaseId="314dcc5e-6f27-410c-bfe3-3cabfa6768bf" ui-data="productType=installment&useReturnLinks=true&view=newTab" payment-data="items.0.name=' +
+//         title +
+//         '&items.0.price=' +
+//         Number(priceNew.replace(' ', '').replace('₽', '')) +
+//         '&items.0.quantity=1&promoCode=installment_0_0_6_6,5&sum=' +
+//         Number(priceNew.replace(' ', '').replace('₽', '')) +
+//         '"></tinkoff-create-button>'
+//       );
+//       goodId.value = document
+//         .querySelector('.view-good-name')
+//         .getAttribute('data-good-id');
+//       goodSubId.value = 0;
+//       const orderCard = modal.querySelector('.order__card');
+//       orderCard.innerHTML = `
+//                 <img src="${photo}" width="170" alt=${title}>
+//                 <p class="card__descr"> ${title}</p>
+//                 <span class="card__price card__price--new">${priceNew}</span>
+//                 <span class="card__price card__price--old">${priceOld}</span>
+//             `;
+//       maskPhone('#order-phone');
+//     });
+//   }
+
+//   modal.addEventListener('click', (evt) => {
+//     const target = evt.target;
+
+//     if (target.closest('.order__button')) {
+//       modal.style.display = '';
+//     } else if (target.matches('.modal__order')) {
+//       modal.style.display = '';
+//     }
+//   });
+
+//   priceContainer.addEventListener('click', (evt) => {
+//     const target = evt.target;
+
+//     const orderModal = (selectorColumn, selectorLink) => {
+//       //Находим все li с классом price__list--2x
+//       const orderList = priceContainer.querySelector(selectorColumn);
+
+//       //Находим фото товара
+//       const photo = priceContainer.querySelector(selectorLink).children[0].src;
+
+//       //Находим модель товара
+//       const mainTitle = document.querySelector('.view-good-name').innerHTML;
+
+//       const title = orderList.querySelector('[data-attribute=name]').innerHTML;
+
+//       //Находим его старую цену
+//       const priceOld = orderList.querySelector('.line-throw').innerHTML;
+
+//       //Находим его новую цену
+//       const priceNew = orderList.querySelector('.bold').innerHTML;
+
+//       //Находим модалку
+//       const orderCard = modal.querySelector('.order__card');
+
+//       // id товара и листа
+//       const goodId = document.querySelector('#data-id-form');
+//       const goodSubId = document.querySelector('#data-sub-id-form');
+
+//       goodId.value = orderList
+//         .querySelector('[data-id]')
+//         .getAttribute('data-id');
+
+//       if (selectorColumn == '.price__list--2x') {
+//         goodSubId.value = 1;
+//       }
+//       if (selectorColumn == '.price__list--3x') {
+//         goodSubId.value = 2;
+//       }
+//       if (selectorColumn == '.price__list--4x') {
+//         goodSubId.value = 3;
+//       }
+//       if (selectorColumn == '.price__list--5x') {
+//         goodSubId.value = 4;
+//       }
+//       if (selectorColumn == '.price__list--6x') {
+//         goodSubId.value = 5;
+//       }
+
+//       //Записываем в модалку данные выбранного товара
+//       orderCard.innerHTML = `
+//                     <img src="${photo}" width="170" alt="${mainTitle}">
+//                     <p class="card__descr">${mainTitle} ${title}</p>
+//                     <span class="card__price card__price--new">${priceNew}</span>
+//                     <span class="card__price card__price--old">${priceOld}</span>
+//                 `;
+//       maskPhone('#order-phone');
+
+//       //Открываем модалку
+//       modal.style.display = 'block';
+//     };
+
+//     if (target.matches('.button-main-pay')) {
+//       // Одна кнопка в листе на мобильной
+//       modal.style.display = 'block';
+
+//       //Находим фото товара
+//       const photo = document.querySelector('.view-good-img').src;
+//       //Находим название товара
+//       const title = document.querySelector('.view-good-name').innerHTML;
+//       //Находим его старую цену
+//       const priceOld = document.querySelector('.view-good-price').innerHTML;
+//       //Находим его новую цену
+//       const priceNew = document.querySelector(
+//         '.view-good-discount-price'
+//       ).innerHTML;
+//       // id товара и листа
+//       const goodId = document.querySelector('#data-id-form');
+//       const goodSubId = document.querySelector('#data-sub-id-form');
+//       goodId.value = document
+//         .querySelector('.view-good-name')
+//         .getAttribute('data-good-id');
+//       goodSubId.value = 0;
+//       const orderCard = modal.querySelector('.order__card');
+//       orderCard.innerHTML = `
+//                 <img src="${photo}" width="170" alt=${title}>
+//                 <p class="card__descr"> ${title}</p>
+//                 <span class="card__price card__price--new">${priceNew}</span>
+//                 <span class="card__price card__price--old">${priceOld}</span>
+//             `;
+//       maskPhone('#order-phone');
+//     }
+
+//     if (target.dataset.button === '2x') {
+//       orderModal('.price__list--2x', '.price__link--2x');
+//     }
+
+//     if (target.dataset.button === '3x') {
+//       orderModal('.price__list--3x', '.price__link--3x');
+//     }
+
+//     if (target.dataset.button === '4x') {
+//       orderModal('.price__list--4x', '.price__link--4x');
+//     }
+
+//     if (target.dataset.button === '5x') {
+//       orderModal('.price__list--5x', '.price__link--5x');
+//     }
+
+//     if (target.dataset.button === '6x') {
+//       orderModal('.price__list--6x', '.price__link--6x');
+//     }
+//   });
+// };
+
+// modalOrderPay();
+
+const modalOrder = (isPay = false) => {
   const modal = document.querySelector('.modal__order');
   const priceContainer = document.querySelector('.price');
-  const productButton = document.querySelector('.button-main');
-  productButton.addEventListener('click', () => {
-    document.querySelector('.modal-order-title').textContent =
-      'Оформление заказа';
-    document.querySelector('.modal-order-btn').textContent = 'Заказать';
-    document
-      .querySelector('.modal-order-form')
-      .setAttribute('data-order', 'order');
-
-    modal.style.display = 'block';
-
-    //Находим фото товара
-    const photo = document.querySelector('.view-good-img').src;
-    //Находим название товара
-    const title = document.querySelector('.view-good-name').innerHTML;
-    //Находим его старую цену
-    let priceOld = '';
-    if (document.querySelector('.view-good-price')) {
-      priceOld = document.querySelector('.view-good-price').innerHTML;
-    }
-    // const priceOld = document.querySelector(".view-good-price").innerHTML;
-    //Находим его новую цену
-    const priceNew = document.querySelector(
-      '.view-good-discount-price'
-    ).innerHTML;
-
-    // id товара и листа
-    const goodId = document.querySelector('#data-id-form');
-    const goodSubId = document.querySelector('#data-sub-id-form');
-    const tinkoffDiv = document.querySelector('#tinkoff-button');
-    tinkoffDiv.insertAdjacentHTML(
-      'afterbegin',
-      '<tinkoff-create-button size="M" subtext="на 6 месяцев" shopId="82273e5b-9587-44ad-b8e0-c8eea7f6322f" showcaseId="314dcc5e-6f27-410c-bfe3-3cabfa6768bf" ui-data="productType=installment&useReturnLinks=true&view=newTab" payment-data="items.0.name=' +
-        title +
-        '&items.0.price=' +
-        Number(priceNew.replace(' ', '').replace('₽', '')) +
-        '&items.0.quantity=1&promoCode=installment_0_0_6_6,5&sum=' +
-        Number(priceNew.replace(' ', '').replace('₽', '')) +
-        '"></tinkoff-create-button>'
-    );
-    tinkoffDiv.style.marginTop = '10px';
-
-    goodId.value = document
-      .querySelector('.view-good-name')
-      .getAttribute('data-good-id');
-    goodSubId.value = 0;
-    const orderCard = document.querySelector('.order__card');
-    orderCard.innerHTML = `
-                <img src="${photo}" width="170" alt=${title}>
-                <p class="card__descr"> ${title}</p>
-                <span class="card__price card__price--new">${priceNew}</span>
-                <span class="card__price card__price--new">${priceOld}</span>
-            `;
-    maskPhone('#order-phone');
-  });
-
-  modal.addEventListener('click', (evt) => {
-    const target = evt.target;
-    const tinkoffDiv = document.querySelector('#tinkoff-button');
-
-    if (target.closest('.order__button')) {
-      modal.style.display = '';
-      tinkoffDiv.removeChild(tinkoffDiv.firstChild);
-    } else if (target.matches('.modal__order')) {
-      modal.style.display = '';
-      tinkoffDiv.removeChild(tinkoffDiv.firstChild);
-    }
-  });
-
-  priceContainer.addEventListener('click', (evt) => {
-    const target = evt.target;
-
-    const orderModal = (selectorColumn, selectorLink) => {
-      //Находим все li с классом price__list--2x
-      const orderList = priceContainer.querySelector(selectorColumn);
-
-      //Находим фото товара
-      const photo = priceContainer.querySelector(selectorLink).children[0].src;
-
-      //Находим модель товара
-      const mainTitle = document.querySelector('.view-good-name').innerHTML;
-
-      const title = orderList.querySelector('[data-attribute=name]').innerHTML;
-
-      //Находим его старую цену
-      const priceOld = orderList.querySelector('.line-throw').innerHTML;
-
-      //Находим его новую цену
-      const priceNew = orderList.querySelector('.bold').innerHTML;
-
-      //Находим модалку
-      const orderCard = modal.querySelector('.order__card');
-
-      // id товара и листа
-      const goodId = document.querySelector('#data-id-form');
-      const goodSubId = document.querySelector('#data-sub-id-form');
-      const tinkoffDiv = document.querySelector('#tinkoff-button');
-      tinkoffDiv.insertAdjacentHTML(
-        'afterbegin',
-        '<tinkoff-create-button size="M" subtext="на 6 месяцев" shopId="82273e5b-9587-44ad-b8e0-c8eea7f6322f" showcaseId="314dcc5e-6f27-410c-bfe3-3cabfa6768bf" ui-data="productType=installment&useReturnLinks=true&view=newTab" payment-data="items.0.name=' +
-          title +
-          '&items.0.price=' +
-          Number(priceNew.replace(' ', '').replace('₽', '')) +
-          '&items.0.quantity=1&promoCode=installment_0_0_6_6,5&sum=' +
-          Number(priceNew.replace(' ', '').replace('₽', '')) +
-          '"></tinkoff-create-button>'
-      );
-      tinkoffDiv.style.marginTop = '10px';
-
-      goodId.value = orderList
-        .querySelector('[data-id]')
-        .getAttribute('data-id');
-
-      if (selectorColumn == '.price__list--2x') {
-        goodSubId.value = 1;
-      }
-      if (selectorColumn == '.price__list--3x') {
-        goodSubId.value = 2;
-      }
-      if (selectorColumn == '.price__list--4x') {
-        goodSubId.value = 3;
-      }
-      if (selectorColumn == '.price__list--5x') {
-        goodSubId.value = 4;
-      }
-      if (selectorColumn == '.price__list--6x') {
-        goodSubId.value = 5;
-      }
-
-      //Записываем в модалку данные выбранного товара
-      orderCard.innerHTML = `
-                    <img src="${photo}" width="170" alt="${mainTitle}">
-                    <p class="card__descr">${mainTitle} ${title}</p>
-                    <span class="card__price card__price--new">${priceNew}</span>
-                    <span class="card__price card__price--old">${priceOld}</span>
-                `;
-      maskPhone('#order-phone');
-
-      //Открываем модалку
-      modal.style.display = 'block';
-    };
-
-    if (target.matches('.button-main')) {
-      // Одна кнопка в листе на мобильной
-      modal.style.display = 'block';
-
-      //Находим фото товара
-      const photo = document.querySelector('.view-good-img').src;
-      //Находим название товара
-      const title = document.querySelector('.view-good-name').innerHTML;
-      //Находим его старую цену
-      let priceOld = '';
-      if (document.querySelector('.view-good-price')) {
-        priceOld = document.querySelector('.view-good-price').innerHTML;
-      }
-      // const priceOld = document.querySelector(".view-good-price").innerHTML;
-      //Находим его новую цену
-      const priceNew = document.querySelector(
-        '.view-good-discount-price'
-      ).innerHTML;
-      // id товара и листа
-      const goodId = document.querySelector('#data-id-form');
-      const goodSubId = document.querySelector('#data-sub-id-form');
-      // const tinkoffDiv = document.querySelector("#tinkoff-button");
-      // tinkoffDiv.insertAdjacentHTML(
-      //   "afterbegin",
-      //   '<tinkoff-create-button size="M" subtext="на 6 месяцев" shopId="82273e5b-9587-44ad-b8e0-c8eea7f6322f" showcaseId="314dcc5e-6f27-410c-bfe3-3cabfa6768bf" ui-data="productType=installment&useReturnLinks=true&view=newTab" payment-data="items.0.name=' +
-      //     title +
-      //     "&items.0.price=" +
-      //     Number(priceNew.replace(" ", "").replace("₽", "")) +
-      //     "&items.0.quantity=1&promoCode=installment_0_0_6_6,5&sum=" +
-      //     Number(priceNew.replace(" ", "").replace("₽", "")) +
-      //     '"></tinkoff-create-button>'
-      // );
-
-      goodId.value = document
-        .querySelector('.view-good-name')
-        .getAttribute('data-good-id');
-      goodSubId.value = 0;
-      const orderCard = modal.querySelector('.order__card');
-      orderCard.innerHTML = `
-                <img src="${photo}" width="170" alt=${title}>
-                <p class="card__descr"> ${title}</p>
-                <span class="card__price card__price--new">${priceNew}</span>
-                <span class="card__price card__price--old">${priceOld}</span>
-            `;
-      maskPhone('#order-phone');
-    }
-
-    if (target.dataset.button === '2x') {
-      orderModal('.price__list--2x', '.price__link--2x');
-    }
-
-    if (target.dataset.button === '3x') {
-      orderModal('.price__list--3x', '.price__link--3x');
-    }
-
-    if (target.dataset.button === '4x') {
-      orderModal('.price__list--4x', '.price__link--4x');
-    }
-
-    if (target.dataset.button === '5x') {
-      orderModal('.price__list--5x', '.price__link--5x');
-    }
-
-    if (target.dataset.button === '6x') {
-      orderModal('.price__list--6x', '.price__link--6x');
-    }
-  });
-};
-modalOrder();
-
-const modalOrderPay = () => {
-  const modal = document.querySelector('.modal__order');
-  const priceContainer = document.querySelector('.price');
-  const productButton = document.querySelector('.button-main-pay');
+  const productButton = document.querySelector(isPay ? '.button-main-pay' : '.button-main:not(.button-main-pay)');
 
   if (productButton) {
     productButton.addEventListener('click', () => {
-      document.querySelector('.modal-order-title').textContent =
-        'Купить онлайн';
-      document.querySelector('.modal-order-btn').textContent = 'Купить';
-      document
-        .querySelector('.modal-order-form')
-        .setAttribute('data-order', 'pay');
+      document.querySelector('.modal-order-title').textContent = isPay ? 'Купить онлайн' : 'Оформление заказа';
+      document.querySelector('.modal-order-btn').textContent = isPay ? 'Купить' : 'Заказать';
+      document.querySelector('.modal-order-form').setAttribute('data-order', isPay ? 'pay' : 'order');
 
       modal.style.display = 'block';
-      //Находим фото товара
+
+      // Извлечение данных о товаре
       const photo = document.querySelector('.view-good-img').src;
-      //Находим название товара
       const title = document.querySelector('.view-good-name').innerHTML;
-      //Находим его старую цену
-      const priceOld = document.querySelector('.view-good-price').innerHTML;
-      //Находим его новую цену
-      const priceNew = document.querySelector(
-        '.view-good-discount-price'
-      ).innerHTML;
+      const priceOld = document.querySelector('.view-good-price') ? document.querySelector('.view-good-price').innerHTML : '';
+      const priceNew = document.querySelector('.view-good-discount-price').innerHTML;
+
       // id товара и листа
       const goodId = document.querySelector('#data-id-form');
       const goodSubId = document.querySelector('#data-sub-id-form');
       const tinkoffDiv = document.querySelector('#tinkoff-button');
+
+      tinkoffDiv.innerHTML = ''; // Очистка предыдущего содержимого
       tinkoffDiv.insertAdjacentHTML(
         'afterbegin',
-        '<tinkoff-create-button size="M" subtext="на 6 месяцев" shopId="82273e5b-9587-44ad-b8e0-c8eea7f6322f" showcaseId="314dcc5e-6f27-410c-bfe3-3cabfa6768bf" ui-data="productType=installment&useReturnLinks=true&view=newTab" payment-data="items.0.name=' +
-          title +
-          '&items.0.price=' +
-          Number(priceNew.replace(' ', '').replace('₽', '')) +
-          '&items.0.quantity=1&promoCode=installment_0_0_6_6,5&sum=' +
-          Number(priceNew.replace(' ', '').replace('₽', '')) +
-          '"></tinkoff-create-button>'
+        `<tinkoff-create-button size="M" subtext="на 6 месяцев" shopId="82273e5b-9587-44ad-b8e0-c8eea7f6322f" showcaseId="314dcc5e-6f27-410c-bfe3-3cabfa6768bf" ui-data="productType=installment&useReturnLinks=true&view=newTab" payment-data="items.0.name=${title}&items.0.price=${Number(priceNew.replace(' ', '').replace('₽', ''))}&items.0.quantity=1&promoCode=installment_0_0_6_6,5&sum=${Number(priceNew.replace(' ', '').replace('₽', ''))}"></tinkoff-create-button>`
       );
-      goodId.value = document
-        .querySelector('.view-good-name')
-        .getAttribute('data-good-id');
+
+      goodId.value = document.querySelector('.view-good-name').getAttribute('data-good-id');
       goodSubId.value = 0;
+
       const orderCard = modal.querySelector('.order__card');
       orderCard.innerHTML = `
-                <img src="${photo}" width="170" alt=${title}>
-                <p class="card__descr"> ${title}</p>
-                <span class="card__price card__price--new">${priceNew}</span>
-                <span class="card__price card__price--old">${priceOld}</span>
-            `;
+        <img src="${photo}" width="170" alt="${title}">
+        <p class="card__descr">${title}</p>
+        <span class="card__price card__price--new">${priceNew}</span>
+        <span class="card__price card__price--old">${priceOld}</span>
+      `;
       maskPhone('#order-phone');
     });
   }
 
   modal.addEventListener('click', (evt) => {
     const target = evt.target;
-
-    if (target.closest('.order__button')) {
-      modal.style.display = '';
-    } else if (target.matches('.modal__order')) {
+    if (target.closest('.order__button') || target.matches('.modal__order')) {
       modal.style.display = '';
     }
   });
@@ -798,121 +966,77 @@ const modalOrderPay = () => {
     const target = evt.target;
 
     const orderModal = (selectorColumn, selectorLink) => {
-      //Находим все li с классом price__list--2x
       const orderList = priceContainer.querySelector(selectorColumn);
-
-      //Находим фото товара
       const photo = priceContainer.querySelector(selectorLink).children[0].src;
-
-      //Находим модель товара
       const mainTitle = document.querySelector('.view-good-name').innerHTML;
-
       const title = orderList.querySelector('[data-attribute=name]').innerHTML;
-
-      //Находим его старую цену
-      const priceOld = orderList.querySelector('.line-throw').innerHTML;
-
-      //Находим его новую цену
+      const priceOld = orderList.querySelector('.line-throw') ? orderList.querySelector('.line-throw').innerHTML : '';
       const priceNew = orderList.querySelector('.bold').innerHTML;
 
-      //Находим модалку
       const orderCard = modal.querySelector('.order__card');
-
-      // id товара и листа
       const goodId = document.querySelector('#data-id-form');
       const goodSubId = document.querySelector('#data-sub-id-form');
 
-      goodId.value = orderList
-        .querySelector('[data-id]')
-        .getAttribute('data-id');
+      goodId.value = orderList.querySelector('[data-id]').getAttribute('data-id');
 
-      if (selectorColumn == '.price__list--2x') {
-        goodSubId.value = 1;
-      }
-      if (selectorColumn == '.price__list--3x') {
-        goodSubId.value = 2;
-      }
-      if (selectorColumn == '.price__list--4x') {
-        goodSubId.value = 3;
-      }
-      if (selectorColumn == '.price__list--5x') {
-        goodSubId.value = 4;
-      }
-      if (selectorColumn == '.price__list--6x') {
-        goodSubId.value = 5;
-      }
+      // Установка значения goodSubId в зависимости от выбранного списка
+      const subIdMap = {
+        '.price__list--2x': 1,
+        '.price__list--3x': 2,
+        '.price__list--4x': 3,
+        '.price__list--5x': 4,
+        '.price__list--6x': 5,
+      };
+      goodSubId.value = subIdMap[selectorColumn] || 0;
 
-      //Записываем в модалку данные выбранного товара
       orderCard.innerHTML = `
-                    <img src="${photo}" width="170" alt="${mainTitle}">
-                    <p class="card__descr">${mainTitle} ${title}</p>
-                    <span class="card__price card__price--new">${priceNew}</span>
-                    <span class="card__price card__price--old">${priceOld}</span>
-                `;
+        <img src="${photo}" width="170" alt="${mainTitle}">
+        <p class="card__descr">${mainTitle} ${title}</p>
+        <span class="card__price card__price--new">${priceNew}</span>
+        <span class="card__price card__price--old">${priceOld}</span>
+      `;
       maskPhone('#order-phone');
-
-      //Открываем модалку
       modal.style.display = 'block';
     };
 
-    if (target.matches('.button-main-pay')) {
-      // Одна кнопка в листе на мобильной
+    if (target.matches('.button-main') || target.matches('.button-main-pay')) {
       modal.style.display = 'block';
-
-      //Находим фото товара
       const photo = document.querySelector('.view-good-img').src;
-      //Находим название товара
       const title = document.querySelector('.view-good-name').innerHTML;
-      //Находим его старую цену
-      const priceOld = document.querySelector('.view-good-price').innerHTML;
-      //Находим его новую цену
-      const priceNew = document.querySelector(
-        '.view-good-discount-price'
-      ).innerHTML;
-      // id товара и листа
+      const priceOld = document.querySelector('.view-good-price') ? document.querySelector('.view-good-price').innerHTML : '';
+      const priceNew = document.querySelector('.view-good-discount-price').innerHTML;
+
       const goodId = document.querySelector('#data-id-form');
       const goodSubId = document.querySelector('#data-sub-id-form');
-      goodId.value = document
-        .querySelector('.view-good-name')
-        .getAttribute('data-good-id');
+      goodId.value = document.querySelector('.view-good-name').getAttribute('data-good-id');
       goodSubId.value = 0;
+
       const orderCard = modal.querySelector('.order__card');
       orderCard.innerHTML = `
-                <img src="${photo}" width="170" alt=${title}>
-                <p class="card__descr"> ${title}</p>
-                <span class="card__price card__price--new">${priceNew}</span>
-                <span class="card__price card__price--old">${priceOld}</span>
-            `;
+        <img src="${photo}" width="170" alt="${title}">
+        <p class="card__descr">${title}</p>
+        <span class="card__price card__price--new">${priceNew}</span>
+        <span class="card__price card__price--old">${priceOld}</span>
+      `;
       maskPhone('#order-phone');
     }
 
-    if (target.dataset.button === '2x') {
-      orderModal('.price__list--2x', '.price__link--2x');
-    }
-
-    if (target.dataset.button === '3x') {
-      orderModal('.price__list--3x', '.price__link--3x');
-    }
-
-    if (target.dataset.button === '4x') {
-      orderModal('.price__list--4x', '.price__link--4x');
-    }
-
-    if (target.dataset.button === '5x') {
-      orderModal('.price__list--5x', '.price__link--5x');
-    }
-
-    if (target.dataset.button === '6x') {
-      orderModal('.price__list--6x', '.price__link--6x');
+    if (target.dataset.button) {
+      orderModal(`.price__list--${target.dataset.button}`, `.price__link--${target.dataset.button}`);
     }
   });
 };
-modalOrderPay();
+
+// Инициализация модалки для оформления заказа
+modalOrder(false); // Для обычного заказа
+// Инициализация модалки для покупки
+modalOrder(true); // Для покупки онлайн
 
 // modal consultation
-const modalConsultation = () => {
+const modalConsultation = (isConsult = false) => {
   const modal = document.querySelector('.modal__consultation');
-  const consultationButton = document.querySelector('#getHelp');
+  const consultationButton = document.querySelector(isConsult ? '.button-outline-main' : '.button-outline:not(.button-outline-main)');
+  const consultButtons = document.querySelectorAll('[data-consult]');
 
   if (consultationButton) {
     consultationButton.addEventListener('click', () => {
@@ -940,6 +1064,12 @@ const modalConsultation = () => {
     });
   }
 
+  consultButtons.forEach((consultButton) => {
+    consultButton.addEventListener('click', () => {
+      modal.style.display = 'block';
+    });
+  });
+
   modal.addEventListener('click', (evt) => {
     const target = evt.target;
 
@@ -951,65 +1081,87 @@ const modalConsultation = () => {
   });
 };
 
-modalConsultation();
+// Инициализация модалки для оформления заказа
+modalConsultation(false); // Для обычного заказа
+// Инициализация модалки для покупки
+modalConsultation(true); // Для покупки онлайн
 
 // modal consultation
-const modalConsult = () => {
-  const modal = document.querySelector('.modal__consultation');
-  const priceContainer = document.querySelector('.price');
+// const modalConsult = () => {
+//   const modal = document.querySelector('.modal__consultation');
+//   const priceContainer = document.querySelector('.price');
 
-  // Обработчик для всех кнопок "Получить консультацию"
-  priceContainer.addEventListener('click', (evt) => {
-    const target = evt.target;
+//   // Обработчик для всех кнопок "Получить консультацию"
+//   priceContainer.addEventListener('click', (evt) => {
+//     const target = evt.target;
 
-    if (target.matches('.button-main-consultation')) {
-      const productCard = target.closest('.product-card'); // Предполагаем, что у каждого товара есть класс .product-card
+//     if (target.matches('.button-main-consultation')) {
+//       const productCard = target.closest('.product-card'); // Предполагаем, что у каждого товара есть класс .product-card
 
-      // Получаем данные из соответствующей карточки товара
-      const photo = productCard.querySelector('.view-good-img').src;
-      const title = productCard.querySelector('.view-good-name').innerHTML;
-      const priceOld = productCard.querySelector('.view-good-price')
-        ? productCard.querySelector('.view-good-price').innerHTML
-        : '';
-      const priceNew = productCard.querySelector(
-        '.view-good-discount-price'
-      ).innerHTML;
+//       // Получаем данные из соответствующей карточки товара
+//       const photo = productCard.querySelector('.view-good-img').src;
+//       const title = productCard.querySelector('.view-good-name').innerHTML;
+//       const priceOld = productCard.querySelector('.view-good-price')
+//         ? productCard.querySelector('.view-good-price').innerHTML
+//         : '';
+//       const priceNew = productCard.querySelector(
+//         '.view-good-discount-price'
+//       ).innerHTML;
 
-      // Заполняем модалку данными
-      document.querySelector('.modal-consultation-title').textContent =
-        'Запросить консультацию';
-      document.querySelector('.modal-consultation-btn').textContent =
-        'Отправить';
-      document
-        .querySelector('.modal-consultation-form')
-        .setAttribute('data-order', 'consultation');
+//       // Заполняем модалку данными
+//       document.querySelector('.modal-consultation-title').textContent =
+//         'Запросить консультацию';
+//       document.querySelector('.modal-consultation-btn').textContent =
+//         'Отправить';
+//       document
+//         .querySelector('.modal-consultation-form')
+//         .setAttribute('data-order', 'consultation');
 
-      const consultationCard = modal.querySelector('.consultation__card');
-      consultationCard.innerHTML = `
-                <img src="${photo}" width="170" alt="${title}">
-                <p class="card__descr">Консультация по товару: ${title}</p>
-                <span class="card__price card__price--new">${priceNew}</span>
-                <span class="card__price card__price--old">${priceOld}</span>
-            `;
-      maskPhone('#consultation-phone');
+//       const consultationCard = modal.querySelector('.consultation__card');
+//       consultationCard.innerHTML = `
+//                 <img src="${photo}" width="170" alt="${title}">
+//                 <p class="card__descr">Консультация по товару: ${title}</p>
+//                 <span class="card__price card__price--new">${priceNew}</span>
+//                 <span class="card__price card__price--old">${priceOld}</span>
+//             `;
+//       maskPhone('#consultation-phone');
 
-      // Открываем модалку
-      modal.style.display = 'block';
-    }
-  });
+//       // Открываем модалку
+//       modal.style.display = 'block';
+//     }
+//   });
+
+//   modal.addEventListener('click', (evt) => {
+//     const target = evt.target;
+
+//     if (target.closest('.consultation__button')) {
+//       modal.style.display = '';
+//     } else if (target.matches('.modal__consultation')) {
+//       modal.style.display = '';
+//     }
+//   });
+// };
+
+// modalConsult();
+
+// Функция вызова модального окна видеообзора
+function modalVideo() {
+  const modal = document.querySelector('.modal__video');
+
+  modal.style.display = 'block';
 
   modal.addEventListener('click', (evt) => {
     const target = evt.target;
 
-    if (target.closest('.consultation__button')) {
+    if (target.closest('.modal__button')) {
       modal.style.display = '';
-    } else if (target.matches('.modal__consultation')) {
+    } else if (target.matches('.modal__video')) {
       modal.style.display = '';
     }
   });
-};
+}
 
-modalConsult();
+document.querySelector('#videoReviewButton').addEventListener('click', modalVideo);
 
 // Маска для поля ввода телефона
 function maskPhone(selector, masked = '+7 (___) ___-__-__') {
@@ -1187,3 +1339,66 @@ const initTabs = (tabsContainer) => {
 // Инициализация табов для каждого контейнера
 const tabContainers = document.querySelectorAll('.tabs-container');
 tabContainers.forEach(initTabs);
+
+// collapse
+const toggleElements = document.querySelectorAll('[data-collapse-toggle]');
+const collapseElements = document.querySelectorAll('[data-collapse-id]');
+
+function updateCollapseState() {
+  toggleElements.forEach((toggle) => {
+    const collapseId = toggle.getAttribute('data-collapse-toggle');
+    const collapseElement = document.querySelector(
+      `[data-collapse-id="${collapseId}"]`
+    );
+
+    if (toggle.classList.contains('active')) {
+      collapseElement.classList.remove('collapsed');
+      collapseElement.style.maxHeight = null;
+    }
+  });
+}
+
+updateCollapseState();
+
+window.addEventListener('resize', updateCollapseState);
+window.addEventListener('DOMContentLoaded', updateCollapseState);
+
+// Обработчик событий для тогглеров коллапсов
+toggleElements.forEach((toggle) => {
+  toggle.addEventListener('click', function () {
+    const collapseId = this.getAttribute('data-collapse-toggle');
+    const collapseElement = document.querySelector(
+      `[data-collapse-id="${collapseId}"]`
+    );
+
+    toggle.classList.toggle('active');
+    if (collapseElement) {
+      collapseElement.classList.toggle('collapsed');
+      collapseElement.style.maxHeight = null;
+    }
+
+    const isActive = toggle.classList.contains('active');
+    const scrollHeight = collapseElement.scrollHeight + 20;
+    if (collapseElement) {
+      if (isActive) {
+        collapseElement.classList.remove('collapsed');
+
+        collapseElement.style.maxHeight = scrollHeight + 'px';
+      } else {
+        collapseElement.classList.add('collapsed');
+        collapseElement.style.maxHeight = null;
+      }
+    }
+  });
+});
+
+// Форма обратной связи
+function initConsultationBlock() {
+  const consultationBlock = document.querySelector('#consultationBlock');
+
+  if (consultationBlock) {
+    maskPhone('#consultationBlockPhone');
+  }
+}
+
+initConsultationBlock();

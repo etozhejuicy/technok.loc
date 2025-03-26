@@ -240,11 +240,15 @@ button {
 }
 
 .button-slider {
-  display: block;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 10px;
   position: relative;
   width: 100%;
   height: 64px;
-  padding: 16px 16px 16px 70px;
+  padding: 16px;
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -255,6 +259,11 @@ button {
   border: 1px solid #ffffff;
   cursor: pointer;
   text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+
+.button-slider svg * {
+  fill: currentColor;
 }
 
 @media (max-width: 999px) {
@@ -266,6 +275,12 @@ button {
 .button-slider:hover {
   background-color: #000000;
   border-color: #000000;
+  color: #ffffff;
+}
+
+.button-slider:focus:active {
+  background-color: #222222;
+  border-color: #222222;
   color: #ffffff;
 }
 
@@ -2559,6 +2574,10 @@ footer li:nth-child(3n) {
   text-align: left;
 }
 
+.product-brief {
+  margin: 0 0 24px auto;
+}
+
 .product .card__price--new {
   padding-top: 0;
   margin-bottom: 8px;
@@ -2624,6 +2643,8 @@ footer li:nth-child(3n) {
 }
 
 .product-slider__main {
+  position: relative;
+  z-index: 1;
   margin-bottom: 26px;
 }
 
@@ -2635,7 +2656,7 @@ footer li:nth-child(3n) {
   position: absolute;
   bottom: 20px;
   right: 20px;
-  z-index: 100;
+  z-index: 2;
   width: fit-content;
   height: fit-content;
 }
@@ -3388,6 +3409,69 @@ footer li:nth-child(3n) {
   .price__list--head li:last-child {
     height: 40px;
   }
+}
+
+/* advantages */
+.advantages {
+  position: relative;
+  padding: 0;
+  margin-bottom: 64px;
+}
+
+.advantages > .container {
+  flex-direction: column;
+}
+
+.advantages-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 999px) {
+  .advantages-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .advantages-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.advantage {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.advantage-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+}
+
+.advantage-icon > svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.advantage > b {
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.advantage > p {
 }
 
 /* Article */

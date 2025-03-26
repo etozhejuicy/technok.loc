@@ -454,6 +454,66 @@ const gallerySlider = () => {
 };
 gallerySlider();
 
+//gallery-slider
+const photoGallery = () => {
+  const photoGallerySlider = document.querySelector('.photo-gallery__slider');
+
+  $('a[data-rel^=lightcase]').lightcase();
+
+  if (photoGallerySlider) {
+    $('.photo-gallery__slider').slick({
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      dots: false,
+      arrows: true,
+      swipe: true,
+      prevArrow: `<button type="button" class="slick-prev">&larr;</button>`,
+      nextArrow: `<button type="button" class="slick-next">&rarr;</button>`,
+      focusOnSelect: true,
+      fade: false,
+      focusOnSelect: true,
+      variableWidth: false,
+      responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 4,
+          },
+        },
+        {
+          breakpoint: 999,
+          settings: {
+            slidesToShow: 3,
+          },
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 3,
+          },
+        },
+        {
+          breakpoint: 571,
+          settings: {
+            arrows: false,
+            dots: true,
+            slidesToShow: 2,
+          },
+        },
+        {
+          breakpoint: 420,
+          settings: {
+            arrows: false,
+            dots: true,
+            slidesToShow: 1,
+          },
+        },
+      ],
+    });
+  }
+};
+photoGallery();
+
 // modal order
 const modalOrder = () => {
   const modal = document.querySelector('.modal__order');

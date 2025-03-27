@@ -1182,18 +1182,28 @@ modalConsultation(true); // Для покупки онлайн
 // Функция вызова модального окна видеообзора
 function modalVideo() {
   const modal = document.querySelector('.modal__video');
+  const iframeElem = modal.querySelector('[data-video-element]');
 
+  if (!modal || !iframeElem) {
+    console.error('Модальное окно или элемент iframe не найдены.');
+
+    return;
+  }
+
+  iframeElem.innerHTML = videoObject;
   modal.style.display = 'block';
 
-  modal.addEventListener('click', (evt) => {
+  const closeModal = (evt) => {
     const target = evt.target;
 
-    if (target.closest('.modal__button')) {
-      modal.style.display = '';
-    } else if (target.matches('.modal__video')) {
-      modal.style.display = '';
+    if (target.closest('.modal__button') || target.matches('.modal__video')) {
+      modal.style.display = 'none';
+      iframeElem.innerHTML = '';
+      modal.removeEventListener('click', closeModal);
     }
-  });
+  };
+
+  modal.addEventListener('click', closeModal);
 }
 
 document

@@ -1428,11 +1428,7 @@
 	<!-- Новая модалка: Видео -->
 	<div class="modal__video">
 		<div class="modal__video--element">
-			<div class="modal__video--wrapper">
-				<iframe width="720" height="405" src="https://rutube.ru/play/embed/5a5def48d0ded6983ed10ef67ca08e67/"
-					frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen
-					allowFullScreen></iframe>
-			</div>
+			<div class="modal__video--wrapper" data-video-element=""></div>
 			<button class="modal__button">
 				<svg class="modal__icon" width="18" height="18">
 					<use xlink:href="/img/iconsHeader.svg#cross"></use>
@@ -1447,6 +1443,12 @@
 			</path>
 		</svg>
 	</a>
+	<!-- Объект с видеообзором -->
+	<script>
+		const videoObject = `<iframe width="720" height="405" src="https://rutube.ru/play/embed/5a5def48d0ded6983ed10ef67ca08e67/"
+					frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen
+					allowFullScreen></iframe>`;
+	</script>
 	<script src="/assets/c33a7e09/jquery.js"></script>
 	<script src="/assets/208bd8c3/yii.js"></script>
 	<script src="/js/jquery-3.3.1.min.js"></script>

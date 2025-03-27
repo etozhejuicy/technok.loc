@@ -3300,6 +3300,18 @@ footer li:nth-child(3n) {
   background-color: #f3f3f3;
 }
 
+.price__bottom {
+  display: none;
+}
+
+@media (max-width: 999px) {
+  .price__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
 /* .price:after {
     position: absolute;
     content: "";

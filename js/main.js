@@ -1063,55 +1063,142 @@ modalOrder(false); // Для обычного заказа
 // Инициализация модалки для покупки
 modalOrder(true); // Для покупки онлайн
 
-// modal consultation
-const modalConsultation = (isConsult = false) => {
+const modalConsultation = (isMain = false) => {
   const modal = document.querySelector('.modal__consultation');
-  const consultationButton = document.querySelector(
-    isConsult
-      ? '.button-outline-main'
-      : '.button-outline:not(.button-outline-main)'
+  const priceContainer = document.querySelector('.price');
+  const productButton = document.querySelector(
+    isMain ? '.button-outline' : '.button-outline:not(.button-outline-main)'
   );
-  const consultButtons = document.querySelectorAll('[data-consult]');
 
-  if (consultationButton) {
-    consultationButton.addEventListener('click', () => {
-      document.querySelector('.modal-order-title').textContent =
-        'Запросить консультацию';
-      document.querySelector('.modal-order-btn').textContent = 'Отправить';
-      document
+  if (productButton) {
+    productButton.addEventListener('click', () => {
+      modal.querySelector('.modal-order-title').textContent =
+        'Получить консультацию';
+      modal.querySelector('.modal-order-btn').textContent =
+        'Получить консультацию';
+      modal
         .querySelector('.modal-order-form')
         .setAttribute('data-order', 'consultation');
 
       modal.style.display = 'block';
 
-      // Находим фото товара (если необходимо)
-      const productPhoto = document.querySelector('.view-good-img').src;
-      // Находим название товара (если необходимо)
-      const productTitle = document.querySelector('.view-good-name').innerHTML;
+      // Извлечение данных о товаре
+      const photo = document.querySelector('.view-good-img').src;
+      const title = document.querySelector('.view-good-name').innerHTML;
+      const priceOld = document.querySelector('.view-good-price')
+        ? document.querySelector('.view-good-price').innerHTML
+        : '';
+      const priceNew = document.querySelector(
+        '.view-good-discount-price'
+      ).innerHTML;
 
-      // Записываем данные в модалку
-      const consultationCard = modal.querySelector('.order__card');
-      consultationCard.innerHTML = `
-                <img src="${productPhoto}" width="170" alt="${productTitle}">
-                <p class="card__descr">${productTitle}</p>
-            `;
+      // id товара и листа
+      const goodId = document.querySelector('#data-id-form');
+      const goodSubId = document.querySelector('#data-sub-id-form');
+
+      goodId.value = document
+        .querySelector('.view-good-name')
+        .getAttribute('data-good-id');
+      goodSubId.value = 0;
+
+      const orderCard = modal.querySelector('.order__card');
+      orderCard.innerHTML = `
+        <img src="${photo}" width="170" alt="${title}">
+        <p class="card__descr">${title}</p>
+        <span class="card__price card__price--new">${priceNew}</span>
+        <span class="card__price card__price--old">${priceOld}</span>
+      `;
       maskPhone('#consultation-phone');
     });
   }
 
-  consultButtons.forEach((consultButton) => {
-    consultButton.addEventListener('click', () => {
-      modal.style.display = 'block';
-    });
-  });
-
   modal.addEventListener('click', (evt) => {
     const target = evt.target;
+    if (
+      target.closest('.modal__button') ||
+      target.matches('.modal__consultation')
+    ) {
+      modal.style.display = 'none';
+    }
+  });
 
-    if (target.closest('.modal__button')) {
-      modal.style.display = '';
-    } else if (target.matches('.modal__consultation')) {
-      modal.style.display = '';
+  priceContainer.addEventListener('click', (evt) => {
+    const target = evt.target;
+
+    const consultModal = (selectorColumn, selectorLink) => {
+      const orderList = priceContainer.querySelector(selectorColumn);
+      const photo = priceContainer.querySelector(selectorLink).children[0].src;
+      const mainTitle = document.querySelector('.view-good-name').innerHTML;
+      const title = orderList.querySelector('[data-attribute=name]').innerHTML;
+      const priceOld = orderList.querySelector('.line-throw')
+        ? orderList.querySelector('.line-throw').innerHTML
+        : '';
+      const priceNew = orderList.querySelector('.bold').innerHTML;
+
+      const orderCard = modal.querySelector('.order__card');
+      const goodId = document.querySelector('#data-id-form');
+      const goodSubId = document.querySelector('#data-sub-id-form');
+
+      goodId.value = orderList
+        .querySelector('[data-id]')
+        .getAttribute('data-id');
+
+      // Установка значения goodSubId в зависимости от выбранного списка
+      const subIdMap = {
+        '.price__list--2x': 1,
+        '.price__list--3x': 2,
+        '.price__list--4x': 3,
+        '.price__list--5x': 4,
+        '.price__list--6x': 5,
+      };
+      goodSubId.value = subIdMap[selectorColumn] || 0;
+
+      orderCard.innerHTML = `
+        <img src="${photo}" width="170" alt="${mainTitle}">
+        <p class="card__descr">${mainTitle} ${title}</p>
+        <span class="card__price card__price--new">${priceNew}</span>
+        <span class="card__price card__price--old">${priceOld}</span>
+      `;
+      maskPhone('#consultation-phone');
+      modal.style.display = 'block';
+    };
+
+    if (
+      target.matches('.button-outline') ||
+      target.matches('.button-outline-main')
+    ) {
+      modal.style.display = 'block';
+      const photo = document.querySelector('.view-good-img').src;
+      const title = document.querySelector('.view-good-name').innerHTML;
+      const priceOld = document.querySelector('.view-good-price')
+        ? document.querySelector('.view-good-price').innerHTML
+        : '';
+      const priceNew = document.querySelector(
+        '.view-good-discount-price'
+      ).innerHTML;
+
+      const goodId = document.querySelector('#data-id-form');
+      const goodSubId = document.querySelector('#data-sub-id-form');
+      goodId.value = document
+        .querySelector('.view-good-name')
+        .getAttribute('data-good-id');
+      goodSubId.value = 0;
+
+      const orderCard = modal.querySelector('.order__card');
+      orderCard.innerHTML = `
+        <img src="${photo}" width="170" alt="${title}">
+        <p class="card__descr">${title}</p>
+        <span class="card__price card__price--new">${priceNew}</span>
+        <span class="card__price card__price--old">${priceOld}</span>
+      `;
+      maskPhone('#consultation-phone');
+    }
+
+    if (target.dataset.consult) {
+      consultModal(
+        `.price__list--${target.dataset.consult}`,
+        `.price__link--${target.dataset.consult}`
+      );
     }
   });
 };
@@ -1120,64 +1207,6 @@ const modalConsultation = (isConsult = false) => {
 modalConsultation(false); // Для обычного заказа
 // Инициализация модалки для покупки
 modalConsultation(true); // Для покупки онлайн
-
-// modal consultation
-// const modalConsult = () => {
-//   const modal = document.querySelector('.modal__consultation');
-//   const priceContainer = document.querySelector('.price');
-
-//   // Обработчик для всех кнопок "Получить консультацию"
-//   priceContainer.addEventListener('click', (evt) => {
-//     const target = evt.target;
-
-//     if (target.matches('.button-main-consultation')) {
-//       const productCard = target.closest('.product-card'); // Предполагаем, что у каждого товара есть класс .product-card
-
-//       // Получаем данные из соответствующей карточки товара
-//       const photo = productCard.querySelector('.view-good-img').src;
-//       const title = productCard.querySelector('.view-good-name').innerHTML;
-//       const priceOld = productCard.querySelector('.view-good-price')
-//         ? productCard.querySelector('.view-good-price').innerHTML
-//         : '';
-//       const priceNew = productCard.querySelector(
-//         '.view-good-discount-price'
-//       ).innerHTML;
-
-//       // Заполняем модалку данными
-//       document.querySelector('.modal-consultation-title').textContent =
-//         'Запросить консультацию';
-//       document.querySelector('.modal-consultation-btn').textContent =
-//         'Отправить';
-//       document
-//         .querySelector('.modal-consultation-form')
-//         .setAttribute('data-order', 'consultation');
-
-//       const consultationCard = modal.querySelector('.consultation__card');
-//       consultationCard.innerHTML = `
-//                 <img src="${photo}" width="170" alt="${title}">
-//                 <p class="card__descr">Консультация по товару: ${title}</p>
-//                 <span class="card__price card__price--new">${priceNew}</span>
-//                 <span class="card__price card__price--old">${priceOld}</span>
-//             `;
-//       maskPhone('#consultation-phone');
-
-//       // Открываем модалку
-//       modal.style.display = 'block';
-//     }
-//   });
-
-//   modal.addEventListener('click', (evt) => {
-//     const target = evt.target;
-
-//     if (target.closest('.consultation__button')) {
-//       modal.style.display = '';
-//     } else if (target.matches('.modal__consultation')) {
-//       modal.style.display = '';
-//     }
-//   });
-// };
-
-// modalConsult();
 
 // Функция вызова модального окна видеообзора
 function modalVideo() {
@@ -1190,8 +1219,11 @@ function modalVideo() {
     return;
   }
 
-  iframeElem.innerHTML = videoObject;
   modal.style.display = 'block';
+
+  setTimeout(() => {
+    iframeElem.innerHTML = videoObject;
+  }, 300);
 
   const closeModal = (evt) => {
     const target = evt.target;
@@ -1260,10 +1292,14 @@ const tabPrice = () => {
     const tabLinks = price.querySelectorAll('.price__link');
     const tabContainer = price.querySelector('.container');
     const mobileBtn = price.querySelector('#mobileTabOrderBtn');
+    const mobileConsult = price.querySelector('#mobileTabConsultBtn');
 
     // Устанавливаем начальное состояние
     mobileBtn.setAttribute('data-button', '2x');
+    mobileConsult.setAttribute('data-consult', '2x');
+
     const defaultTab = price.querySelector('.price__list--2x');
+
     if (defaultTab) {
       defaultTab.style.display = 'block';
     }
@@ -1283,6 +1319,11 @@ const tabPrice = () => {
         // Обновляем значение data-button для mobileBtn
         mobileBtn.setAttribute(
           'data-button',
+          target.getAttribute('data-filter')
+        );
+
+        mobileConsult.setAttribute(
+          'data-consult',
           target.getAttribute('data-filter')
         );
 

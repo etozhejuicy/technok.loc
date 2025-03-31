@@ -920,13 +920,13 @@ const modalOrder = (isPay = false) => {
 
   if (productButton) {
     productButton.addEventListener('click', () => {
-      document.querySelector('.modal-order-title').textContent = isPay
+      modal.querySelector('.modal-order-title').textContent = isPay
         ? 'Купить онлайн'
         : 'Оформление заказа';
-      document.querySelector('.modal-order-btn').textContent = isPay
+      modal.querySelector('.modal-order-btn').textContent = isPay
         ? 'Купить'
         : 'Заказать';
-      document
+      modal
         .querySelector('.modal-order-form')
         .setAttribute('data-order', isPay ? 'pay' : 'order');
 
@@ -943,9 +943,9 @@ const modalOrder = (isPay = false) => {
       ).innerHTML;
 
       // id товара и листа
-      const goodId = document.querySelector('#data-id-form');
-      const goodSubId = document.querySelector('#data-sub-id-form');
-      const tinkoffDiv = document.querySelector('#tinkoff-button');
+      const goodId = modal.querySelector('#data-id-form');
+      const goodSubId = modal.querySelector('#data-sub-id-form');
+      const tinkoffDiv = modal.querySelector('#tinkoff-button');
 
       tinkoffDiv.innerHTML = ''; // Очистка предыдущего содержимого
       tinkoffDiv.insertAdjacentHTML(
@@ -994,8 +994,8 @@ const modalOrder = (isPay = false) => {
       const priceNew = orderList.querySelector('.bold').innerHTML;
 
       const orderCard = modal.querySelector('.order__card');
-      const goodId = document.querySelector('#data-id-form');
-      const goodSubId = document.querySelector('#data-sub-id-form');
+      const goodId = modal.querySelector('#data-id-form');
+      const goodSubId = modal.querySelector('#data-sub-id-form');
 
       goodId.value = orderList
         .querySelector('[data-id]')
@@ -1032,8 +1032,8 @@ const modalOrder = (isPay = false) => {
         '.view-good-discount-price'
       ).innerHTML;
 
-      const goodId = document.querySelector('#data-id-form');
-      const goodSubId = document.querySelector('#data-sub-id-form');
+      const goodId = modal.querySelector('#data-id-form');
+      const goodSubId = modal.querySelector('#data-sub-id-form');
       goodId.value = document
         .querySelector('.view-good-name')
         .getAttribute('data-good-id');
@@ -1093,8 +1093,8 @@ const modalConsultation = (isMain = false) => {
       ).innerHTML;
 
       // id товара и листа
-      const goodId = document.querySelector('#data-id-form');
-      const goodSubId = document.querySelector('#data-sub-id-form');
+      const goodId = modal.querySelector('#data-id-form');
+      const goodSubId = modal.querySelector('#data-sub-id-form');
 
       goodId.value = document
         .querySelector('.view-good-name')
@@ -1136,8 +1136,8 @@ const modalConsultation = (isMain = false) => {
       const priceNew = orderList.querySelector('.bold').innerHTML;
 
       const orderCard = modal.querySelector('.order__card');
-      const goodId = document.querySelector('#data-id-form');
-      const goodSubId = document.querySelector('#data-sub-id-form');
+      const goodId = modal.querySelector('#data-id-form');
+      const goodSubId = modal.querySelector('#data-sub-id-form');
 
       goodId.value = orderList
         .querySelector('[data-id]')
@@ -1164,7 +1164,7 @@ const modalConsultation = (isMain = false) => {
     };
 
     if (
-      target.matches('.button-outline') ||
+      target.matches('.button-outline:is(.button-outline-main)') ||
       target.matches('.button-outline-main')
     ) {
       modal.style.display = 'block';
@@ -1177,8 +1177,8 @@ const modalConsultation = (isMain = false) => {
         '.view-good-discount-price'
       ).innerHTML;
 
-      const goodId = document.querySelector('#data-id-form');
-      const goodSubId = document.querySelector('#data-sub-id-form');
+      const goodId = modal.querySelector('#data-id-form');
+      const goodSubId = modal.querySelector('#data-sub-id-form');
       goodId.value = document
         .querySelector('.view-good-name')
         .getAttribute('data-good-id');

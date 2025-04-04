@@ -3871,10 +3871,29 @@ article {
   width: 50px;
 }
 
+.video-products .container {
+  justify-content: flex-start;
+  gap: 3%;
+}
+
+@media (max-width: 999px) {
+  .video-products .container {
+    gap: 2%;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 576px) {
+  .video-products .container {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+}
+
 @media screen and (max-width: 1024px) {
   .video-products .container {
-    flex-wrap: wrap;
-    justify-content: space-between;
+    /* flex-wrap: wrap; */
+    /* justify-content: space-between; */
   }
 
   .video-products .video {

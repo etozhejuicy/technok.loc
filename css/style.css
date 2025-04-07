@@ -2723,6 +2723,14 @@ footer li:nth-child(3n) {
   margin-bottom: 24px;
 }
 
+.product .prices .card__price--new {
+  margin-top: 0;
+}
+
+.product .prices .card__price--old {
+  margin-bottom: 0;
+}
+
 .product .button--wrapper .button--wrapper-last {
   margin: 0 0 56px;
 }
@@ -2977,6 +2985,14 @@ footer li:nth-child(3n) {
     text-align: center;
   }
 
+  .product .prices .card__price--new {
+    margin-top: 16px;
+  }
+
+  .product .prices .card__price--old {
+    margin-bottom: 24px;
+  }
+
   .product-slider {
     width: 100%;
     margin: 0 auto 16px;
@@ -3009,6 +3025,12 @@ footer li:nth-child(3n) {
   }
   .product .button--wrapper {
     margin: 0 auto 16px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .product .empty__string {
+    display: none;
   }
 }
 
